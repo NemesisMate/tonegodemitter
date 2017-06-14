@@ -8,12 +8,18 @@ repositories {
     maven { url 'https://jitpack.io' }
 }
 
-defaultTasks 'copyJarToRelease'
-
-task copyJarToRelease {
-    copy {
-        from './lib/tonegod.emitter-2.1.jar'
-        into "./release/"
-    }
+dependencies {
+    //compile 'com.github.javasabr:tonegodemitter:temp-SNAPSHOT'
 }
 
+copy {
+    from(zipTree("./artefacts/tonegod.emitter-2.1.jar"))
+    into("./build/classes/")
+}
+
+jar {
+    baseName = 'tonegod.emitter'
+    version =  '2.1'
+}
+
+defaultTasks 'clean', 'build'
